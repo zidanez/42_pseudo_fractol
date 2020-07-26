@@ -6,7 +6,7 @@
 /*   By: fnancy <fnancy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 12:59:57 by manya             #+#    #+#             */
-/*   Updated: 2020/07/26 13:22:30 by fnancy           ###   ########.fr       */
+/*   Updated: 2020/07/26 16:47:58 by fnancy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_str(t_str *str)
 	line = MAX_WIN_SIZE_X;
 	endian = 0;
 
-	str->c_e = 0.42563;
+	str->c_e = 0.32563;
 	str->c_m = 0.3842;
 	str->zoom = 200;
 	str->mlx_ptr = mlx_init();

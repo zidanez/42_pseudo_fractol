@@ -6,7 +6,7 @@
 /*   By: fnancy <fnancy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 13:13:08 by manya             #+#    #+#             */
-/*   Updated: 2020/07/26 13:36:20 by fnancy           ###   ########.fr       */
+/*   Updated: 2020/07/26 16:39:31 by fnancy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,14 @@ int		key_press(int button, t_str *p)
 {
 	if (button == 53)
 		close_win((void *)0);
+	if (button == 126)
+		p->shift_y += 10.0 / p->zoom;
+	if (button == 125)
+		p->shift_y -= 10.0 / p->zoom;
+	if (button == 123)
+		p->shift_x += 10.0 / p->zoom;
+	if (button == 124)
+		p->shift_x -= 10.0 / p->zoom;
+	draw_fractal(p);
 	return (0);
 }
