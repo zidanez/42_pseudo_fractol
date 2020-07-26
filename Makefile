@@ -6,7 +6,7 @@
 #    By: fnancy <fnancy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/03 14:41:58 by fnancy            #+#    #+#              #
-#    Updated: 2020/07/26 12:34:16 by fnancy           ###   ########.fr        #
+#    Updated: 2020/07/26 14:12:50 by fnancy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 INC = $(addprefix -I, $(INC_PATH))
 INC_LIB = $(addprefix -I, $(LIB_INC_PATH))
 
-SRC_FILES = main.c julia.c fractol_init.c mondelbrode.c control.c draw_fractal.c
+SRC_FILES = main.c julia.c fractol_init.c mondelbrode.c control.c burningship.c draw_fractal.c
 
 ADD_OBJ = $(addprefix $(OBJ_PATH), env bltns exe lex readline bltns/bltn_cd sys_tool)
 

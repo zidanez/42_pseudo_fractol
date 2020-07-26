@@ -6,7 +6,7 @@
 /*   By: fnancy <fnancy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 15:44:04 by manya             #+#    #+#             */
-/*   Updated: 2020/07/26 13:38:24 by fnancy           ###   ########.fr       */
+/*   Updated: 2020/07/26 14:16:27 by fnancy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,19 @@ int main(int argc, char **argv)
 		str.type_fract = 1;
 	else if (ft_strequ(argv[1], "julia"))
 		str.type_fract = 2;
+	else if (ft_strequ(argv[1], "burningship"))
+		str.type_fract = 3;
 	else
 		exit (0);
-	if (str.type_fract == 1)
-	{
-		str.shift_x = -2.6;
-		str.shift_y = -2.0;
-	}
-	else if (str.type_fract == 2)
+	if (str.type_fract == 2)
 	{
 		str.shift_x = 0;
 		str.shift_y = 0;
+	}
+	else
+	{
+		str.shift_x = -2.6;
+		str.shift_y = -2.0;
 	}
 	draw_fractal(&str);
 	mlx_put_image_to_window(str.mlx_ptr, str.win_ptr, str.img, 0, 0);

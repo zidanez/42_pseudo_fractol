@@ -6,7 +6,7 @@
 /*   By: fnancy <fnancy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 12:38:32 by manya             #+#    #+#             */
-/*   Updated: 2020/07/26 13:29:21 by fnancy           ###   ########.fr       */
+/*   Updated: 2020/07/26 14:11:27 by fnancy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ void	draw_fractal(t_str *new1);
 int		mouse_move(int x, int y, t_str *p);
 
 void	draw_fractal(t_str *new1);
-
+void	draw_burningship(t_str *str);
 #endif
