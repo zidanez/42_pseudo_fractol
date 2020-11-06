@@ -6,7 +6,7 @@
 /*   By: fnancy <fnancy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 13:13:08 by manya             #+#    #+#             */
-/*   Updated: 2020/07/26 16:39:31 by fnancy           ###   ########.fr       */
+/*   Updated: 2020/11/06 17:50:42 by fnancy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int		mouse_move(int x, int y, t_str *p)
 			p->mous_x = x;
 			p->mous_y = y;
 		}
-			p->c_e += (x - p->mous_x) / p->zoom;
-			p->c_m += (y - p->mous_y) / p->zoom;
+			p->c_e += ((double)x - p->mous_x) / p->zoom;
+			p->c_m += ((double)y - p->mous_y) / p->zoom;
 			p->mous_x = x;
 			p->mous_y = y;
 			draw_fractal(p);
