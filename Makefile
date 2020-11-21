@@ -6,7 +6,7 @@
 #    By: fnancy <fnancy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/03 14:41:58 by fnancy            #+#    #+#              #
-#    Updated: 2020/07/26 14:12:50 by fnancy           ###   ########.fr        #
+#    Updated: 2020/11/21 15:41:06 by fnancy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,10 +46,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 INC = $(addprefix -I, $(INC_PATH))
 INC_LIB = $(addprefix -I, $(LIB_INC_PATH))
 
-SRC_FILES = main.c julia.c fractol_init.c mondelbrode.c control.c burningship.c draw_fractal.c
-
-ADD_OBJ = $(addprefix $(OBJ_PATH), env bltns exe lex readline bltns/bltn_cd sys_tool)
-
+SRC_FILES = main.c julia.c fractol_init.c mandelbrot.c control.c burningship.c draw_fractal.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
@@ -61,12 +58,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make make_lft
-	@gcc -o $(NAME) $(INC) $(INC_LIB) $(OBJ) -L $(LIB_MINILIB_PATH) -lmlx $(FRAMEWORK) -L $(LIB_PATH) -lft
+	@gcc -o $(NAME) $(INC) $(INC_LIB) $(OBJ) -L $(LIB_MINILIB_PATH) -lmlx $(FRAMEWORK) -L $(LIB_PATH) -lft $(FLAGS)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@echo "$(GREY)$(UNDERLINE)CREATING >> $@$(ESCN)"
 	@mkdir -p $(OBJ_PATH)
-	#@mkdir -p $(ADD_OBJ)
 	@gcc $(INC) $(INC_LIB) -o $@ -c $<
 
 make_lft:

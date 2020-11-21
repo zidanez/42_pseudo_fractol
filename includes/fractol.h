@@ -6,7 +6,7 @@
 /*   By: fnancy <fnancy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 12:38:32 by manya             #+#    #+#             */
-/*   Updated: 2020/11/06 17:59:35 by fnancy           ###   ########.fr       */
+/*   Updated: 2020/11/21 15:38:10 by fnancy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,30 @@
 # define MAX_WIN_SIZE_Y 1000
 
 # include "../minilibx/X11/mlx.h"
-# include "../libft/libft.h"
+# include "../Libft/includes/libft.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
+
+typedef struct		s_color{
+	int		color;
+	int		r;
+	int		g;
+	int		b;
+	double	hx;
+	double	hy;
+	double	hz;
+}					t_color;
+
+typedef struct		s_fract{
+	double	x;
+	double	y;
+	double	x0;
+	double	y0;
+	int		iteration;
+	double	buf;
+}					t_fract;
 
 typedef struct		s_str{
 	void	*mlx_ptr;

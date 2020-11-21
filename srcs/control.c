@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnancy <fnancy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/23 13:13:08 by manya             #+#    #+#             */
-/*   Updated: 2020/11/06 17:50:42 by fnancy           ###   ########.fr       */
+/*   Created: 2020/11/21 13:23:31 by fnancy            #+#    #+#             */
+/*   Updated: 2020/11/21 14:56:03 by fnancy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
-
 
 int		mouse_move(int x, int y, t_str *p)
 {
@@ -22,15 +21,14 @@ int		mouse_move(int x, int y, t_str *p)
 			p->mous_x = x;
 			p->mous_y = y;
 		}
-			p->c_e += ((double)x - p->mous_x) / p->zoom;
-			p->c_m += ((double)y - p->mous_y) / p->zoom;
-			p->mous_x = x;
-			p->mous_y = y;
-			draw_fractal(p);
+		p->c_e += ((double)x - p->mous_x) / p->zoom;
+		p->c_m += ((double)y - p->mous_y) / p->zoom;
+		p->mous_x = x;
+		p->mous_y = y;
+		draw_fractal(p);
 	}
 	return (0);
 }
-
 
 int		mouse_press(int button, int x, int y, t_str *p)
 {
@@ -57,7 +55,6 @@ int		mouse_press(int button, int x, int y, t_str *p)
 	draw_fractal(p);
 	return (0);
 }
-
 
 int		key_press(int button, t_str *p)
 {

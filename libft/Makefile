@@ -1,109 +1,140 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: wpoudre <marvin@42.fr>                     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/09/08 17:17:22 by wpoudre           #+#    #+#              #
-#    Updated: 2019/09/08 17:17:24 by wpoudre          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = libft.a
+WORK_SPACE = $(shell pwd)
+CC = gcc
+CCFLAGS = -Wall -Werror -Wextra -g
+EMPTY =
+TMP =
 
-FLAGS =	-Wall -Wextra -Werror
+H_DIR = $(WORK_SPACE)/includes
+O_DIR = $(WORK_SPACE)/objs
+A_DIR = $(WORK_SPACE)/alibs
+C_DIR = $(WORK_SPACE)/srcs
 
-LIB_INC = $(addprefix $(INCLUDES), libft.h)
+STD_LIB =		ctype io list dlist mem string gnl lbuff avltr dstr dbg
 
-SRC =           ft_bzero.c\
-        		ft_memccpy.c\
-        		ft_strncpy.c\
-        		ft_memmove.c\
-        		ft_strcat.c\
-        		ft_strcmp.c\
-        		ft_strcpy.c\
-        		ft_strdup.c\
-        		ft_strlen.c\
-        		ft_memchr.c\
-        		ft_memcmp.c\
-        		ft_memset.c\
-        		ft_strncat.c\
-        		ft_strlcat.c\
-        		ft_strchr.c\
-        		ft_strrchr.c\
-        		ft_strstr.c\
-        		ft_strnstr.c\
-        		ft_strncmp.c\
-        		ft_atoi.c\
-        		ft_isalpha.c\
-        		ft_isdigit.c\
-        		ft_isalnum.c\
-        		ft_isascii.c\
-        		ft_isprint.c\
-        		ft_toupper.c\
-        		ft_tolower.c\
-        		ft_memalloc.c\
-        		ft_memdel.c\
-        		ft_strnew.c\
-        		ft_strclr.c\
-        		ft_striter.c\
-        		ft_striteri.c\
-        		ft_strmap.c\
-        		ft_strmapi.c\
-        		ft_strequ.c\
-        		ft_strnequ.c\
-        		ft_strsub.c\
-        		ft_strjoin.c\
-        		ft_strtrim.c\
-        		ft_strsplit.c\
-        		ft_itoa.c\
-        		ft_cu_wards.c\
-        		ft_putchar.c\
-        		ft_putstr.c\
-        		ft_putendl.c\
-        		ft_putchar_fd.c\
-        		ft_putstr_fd.c\
-        		ft_putendl_fd.c\
-        		ft_putnbr_fd.c\
-        		ft_putnbr.c\
-        		ft_memcpy.c\
-        		ft_lstnew.c\
-        		ft_lstdelone.c\
-        		ft_lstdel.c\
-        		ft_lstadd.c\
-        		ft_lstiter.c\
-        		ft_lstmap.c\
-        		ft_alpup.c\
-        		ft_alpdown.c\
-        		ft_lstnelem.c\
-        		ft_sqrt.c\
-        		ft_pow.c\
-        		ft_strndup.c\
-        		ft_matdel.c\
-        		ft_matcp.c\
-        		ft_putmat.c\
-        		get_next_line.c\
+STD_LIBS =		$(patsubst %, libft%.a, $(STD_LIB))
+LIBS =			$(patsubst %, $(A_DIR)/%, $(STD_LIBS))
+ALL_O =			$(foreach lib, $(shell echo $(STD_LIB) | tr a-z A-Z), $(patsubst %, $(O_DIR)/%.o, $($(lib))))
 
-OBJ = $(patsubst %.c, %.o, $(SRC))
+GNLO =			$(patsubst %, $(O_DIR)/%.o, $(GNL))
+GNLS =			$(patsubst %, $(C_DIR)/%.c, $(GNL))
+GNL =			get_next_line
 
-INCLUDES = ../header/
+DBGO =			$(patsubst %, $(O_DIR)/%.o, $(DBG))
+DBGS =			$(patsubst %, $(C_DIR)/%.c, $(DBG))
+DBG =			dbg_timer dbg_timer_points
+
+DSTRO =			$(patsubst %, $(O_DIR)/%.o, $(DSTR))
+DSTRS =			$(patsubst %, $(C_DIR)/%.c, $(DSTR))
+DSTR =			dstr_insert dstr_mem dstr_slice dstr_swpc dstr_srch
+
+CTYPEO =		$(patsubst %, $(O_DIR)/%.o, $(CTYPE))
+CTYPES =		$(patsubst %, $(C_DIR)/%.c, $(CTYPE))
+CTYPE =			ft_toupper ft_tolower ft_isalpha \
+				ft_isascii ft_isdigit ft_isalnum \
+				ft_isprint ft_isspace
+
+IOO =			$(patsubst %, $(O_DIR)/%.o, $(IO))
+IOS =			$(patsubst %, $(C_DIR)/%.c, $(IO))
+IO =			ft_putchar ft_putstr ft_putendl \
+				ft_putnbr ft_putll_base_fd ft_putchar_fd \
+				ft_putstr_fd ft_putendl_fd ft_putnbr_fd \
+				ft_hexdump \
+				\
+				ft_strlen
+				# IMPORT FUNCTIONS
+
+LISTO =			$(patsubst %, $(O_DIR)/%.o, $(LIST))
+LISTS =			$(patsubst %, $(C_DIR)/%.c, $(LIST))
+LIST =			ft_lstnew ft_lstdelone ft_lstdel \
+				ft_lstadd ft_lstiter ft_lstmap \
+				\
+				ft_memdel ft_memcpy
+				# IMPORT FUNCTIONS
+
+DLISTO =		$(patsubst %, $(O_DIR)/%.o, $(DLIST))
+DLISTS =		$(patsubst %, $(C_DIR)/%.c, $(DLIST))
+DLIST =			ft_dlstnew ft_dlstpush ft_dlstunshift \
+				ft_dlstget ft_dlstrget ft_dlstinsert \
+				ft_dlstrmelem ft_dlstcut ft_dlstdel \
+				ft_dlstshift ft_dlstswap ft_dlst_gnsort \
+				ft_dlst_rgnsort ft_dlst_count ft_dlst_maparr \
+				\
+				ft_memdup ft_memcpy
+				# IMPORT FUNCTIONS
+
+MEMO =			$(patsubst %, $(O_DIR)/%.o, $(MEM))
+MEMS =			$(patsubst %, $(C_DIR)/%.c, $(MEM))
+MEM =			ft_memdel ft_memalloc ft_memset \
+				ft_bzero ft_memcpy ft_memccpy \
+				ft_memmove ft_memchr ft_memcmp \
+				ft_realloc ft_memdup
+
+LBUFFO =		$(patsubst %, $(O_DIR)/%.o, $(LBUFF))
+LBUFFS =		$(patsubst %, $(C_DIR)/%.c, $(LBUFF))
+LBUFF =			ft_lbuffer_io
+
+AVLTRO =		$(patsubst %, $(O_DIR)/%.o, $(AVLTR))
+AVLTRS =		$(patsubst %, $(C_DIR)/%.c, $(AVLTR))
+AVLTR =			ft_avl_balance_blt ft_avl_edit_blt ft_avl_srch_blt ft_avl_utils_blt \
+				ft_avl_api_del ft_avl_api_info ft_avl_api_nodecr
+
+STRINGO =		$(patsubst %, $(O_DIR)/%.o, $(STRING))
+STRINGS =		$(patsubst %, $(C_DIR)/%.c, $(STRING))
+STRING =		ft_strnew ft_strdup ft_strchr \
+				ft_strrchr ft_strstr ft_strnstr \
+				ft_strcpy ft_strncpy ft_strcat \
+				ft_strncat ft_strlcat ft_strdel \
+				ft_strclr ft_striter ft_striteri \
+				ft_strmap ft_strmapi ft_strlen \
+				ft_strnlen ft_strcmp ft_strncmp \
+				ft_strequ ft_strnequ ft_strsub \
+				ft_strjoin ft_strtrim ft_strsplit \
+				ft_lltoa_base ft_itoa ft_atoll_base \
+				ft_atoi_base ft_atoi ft_countw_delim ft_strccpy \
+				ft_strsplits ft_strcate ft_mem_mem \
+				\
+				ft_isspace ft_memchr ft_bzero ft_memcpy \
+				ft_memdel ft_memalloc ft_memcmp
+				# IMPORT FUNCTIONS
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+$(NAME): $(ALL_O)
+	@ar rc $(NAME) $(ALL_O);
+	@ranlib $(NAME);
 
-%.o: %.c $(LIB_INC)
-	gcc $(FLAGS) -I $(INCLUDES) -c $<
+o_dir:
+	@if ! [ -d $(O_DIR) ]; then mkdir $(O_DIR); fi;
+
+a_dir: o_dir
+	@if ! [ -d $(A_DIR) ]; then mkdir $(A_DIR); fi;
+
+$(O_DIR)/%.o: $(C_DIR)/%.c
+	@make o_dir
+	@echo "\033[1m\033[38;2;0;60;255mCompiling : \033[7m$<\033[0m\033[1m\033[38;2;0;60;255m <<\033[0m";
+	@$(CC) $(CCFLAGS) -c $< -o $@ -I$(H_DIR);
+
+libft%.a: a_dir
+	$(eval EMPTY = $(shell echo $(patsubst libft%.a, %O, $@) | tr a-z A-Z))
+	@echo "$@ :\n";
+	@make $($(EMPTY));
+	@ar rc $(A_DIR)/$@ $($(EMPTY));
+	@ranlib $(A_DIR)/$@;
+	@echo "\n\033[1m\033[38;2;0;255;0m$@ is compiled\033[0m\n";
 
 clean:
-	/bin/rm -f *.o
+	@rm -rf $(O_DIR)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@rm -rf $(A_DIR)
+	@rm -f $(NAME)
+
+re_libft%.a:
+	$(eval EMPTY = $(shell echo $(patsubst re_libft%.a, %O, $@) | tr a-z A-Z))
+	$(eval TMP = $(patsubst re_%, %, $@))
+	@rm -f $(A_DIR)/$(TMP);
+	@rm -f $($(EMPTY));
+	@make $(TMP);
 
 re: fclean all
-
-.PHONY: all clean fclean re

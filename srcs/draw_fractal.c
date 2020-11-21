@@ -6,7 +6,7 @@
 /*   By: fnancy <fnancy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 12:33:59 by fnancy            #+#    #+#             */
-/*   Updated: 2020/07/26 14:12:28 by fnancy           ###   ########.fr       */
+/*   Updated: 2020/11/21 14:57:14 by fnancy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void		draw_fractal(t_str *new1)
 	pthread_t	threads[10];
 	t_str		fractols[10];
 	int			i;
-	
-	i = 0;
-	while (i < 10)
+
+	i = -1;
+	while (++i < 10)
 	{
 		fractols[i] = *new1;
 		if (new1->type_fract == 1)
@@ -34,7 +34,6 @@ void		draw_fractal(t_str *new1)
 			if (pthread_create(&threads[i], NULL,
 			(void *(*)(void *))draw_burningship, (void *)&fractols[i]))
 				exit(0);
-		i++;
 	}
 	while (i-- > 0)
 		if (pthread_join(threads[i], NULL))

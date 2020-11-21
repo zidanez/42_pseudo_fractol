@@ -5,40 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnancy <fnancy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/23 13:03:27 by manya             #+#    #+#             */
-/*   Updated: 2020/07/26 16:45:19 by fnancy           ###   ########.fr       */
+/*   Created: 2020/11/21 13:23:55 by fnancy            #+#    #+#             */
+/*   Updated: 2020/11/21 14:31:35 by fnancy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/fractol.h"
 
-void draw_julia(t_str *str)
+void		vars_init(t_fract *v, t_str *str)
 {
-	double x,y, x0, y0;
-	int iteration;
-	double buf;
+	v->iteration = 0;
+	v->y = (double)MAX_WIN_SIZE_Y / str->zoom / 2 - str->shift_y;
+}
 
-	iteration = 0;
-	y = (double)MAX_WIN_SIZE_Y / str->zoom / 2 - str->shift_y;
-	while(y < MAX_WIN_SIZE_Y)
+void		vars_init_x0y0(t_fract *v, t_str *str)
+{
+	v->y0 = (double)v->y / str->zoom + str->shift_y - 2.0;
+	v->x0 = (double)v->x / str->zoom - 3.0 / 2 + str->shift_x - 1.2;
+}
+
+void		draw_julia(t_str *str)
+{
+	t_fract v;
+
+	vars_init(&v, str);
+	while (v.y < MAX_WIN_SIZE_Y)
 	{
-		x = (double)MAX_WIN_SIZE_X / str->zoom / 2 - str->shift_x;
-		while(x < MAX_WIN_SIZE_X)
+		v.x = (double)MAX_WIN_SIZE_X / str->zoom / 2 - str->shift_x;
+		while (v.x < MAX_WIN_SIZE_X)
 		{
-			y0 = (double) y / str->zoom + str->shift_y - 2.0;                                                   
-			x0 = (double) x / str->zoom - 3.0 / 2 + str->shift_x - 1.2;  
-			while((x0 * x0 + y0 * y0) <= 200.0 && iteration++ < str->iteration)
+			vars_init_x0y0(&v, str);
+			while ((v.x0 * v.x0 + v.y0 * v.y0)\
+						<= 200.0 && v.iteration++ < str->iteration)
 			{
-				buf = x0 * x0 - y0 * y0;                                                                           
-				y0 = 2 * x0 * y0 + str->c_e;                                                                           
-				x0 = buf + str->c_m;                                                                                 
+				v.buf = v.x0 * v.x0 - v.y0 * v.y0;
+				v.y0 = 2 * v.x0 * v.y0 + str->c_e;
+				v.x0 = v.buf + str->c_m;
 			}
-			buf = (double)iteration - log2(log2((x0 * x0) + (y0 * y0))) + 9.0;
-			str->img_data[(int)x + (int)y * MAX_WIN_SIZE_X] = get_color(buf);
-			iteration = 0;
-			x++;
+			v.buf = (double)v.iteration - log2(log2((v.x0 * v.x0)\
+						+ (v.y0 * v.y0))) + 9.0;
+			str->img_data[(int)v.x +\
+							(int)v.y * MAX_WIN_SIZE_X] = get_color(v.buf);
+			v.iteration = 0;
+			v.x++;
 		}
-		y++;
+		v.y++;
 	}
 }
